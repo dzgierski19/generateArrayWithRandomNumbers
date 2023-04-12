@@ -3,46 +3,36 @@ const generateArrayOfArrays = (
   howManyNumbers: number,
   min: number,
   max: number
-) => {
+): number[][] => {
   isInputInteger(howManyArrays);
   isNumberHigherThanZero(howManyArrays);
-  const arraySum: number[][] = Array.from(
+  return Array.from(
     { length: howManyArrays },
     (k) => (k = generateArrayWithRandomNumbers(howManyNumbers, min, max))
   );
-  return arraySum;
 };
 
 const generateArrayWithRandomNumbers = (
   howManyNumbers: number,
   min: number,
   max: number
-) => {
+): number[] => {
   isInputInteger(howManyNumbers);
   isNumberHigherThanZero(howManyNumbers);
-  const arrayZero: number[] = Array.from(
+  return Array.from(
     { length: howManyNumbers },
     (k) => (k = generateRandomNumberInRangeMinMax(min, max))
   );
-  return arrayZero;
 };
 
 const generateRandomNumberInRangeMinMax = (min: number, max: number) => {
-  isInputInteger(min);
-  isInputInteger(max);
   isMinMoreThanMax(min, max);
-  return Math.floor(Math.random() * (max + 1 - min) + min);
+  return Number((Math.random() * (max + 1 - min) + min).toFixed(2));
 };
 
 const isMinMoreThanMax = (min: number, max: number) => {
   if (max - min <= 0) {
     throw new Error("You must provide max higher than min");
-  }
-};
-
-const isNumberHigherOrEqualZero = (input: number) => {
-  if (input < 0) {
-    throw new Error("You must provide number higher or equal 0");
   }
 };
 
@@ -58,4 +48,4 @@ const isInputInteger = (input: number) => {
   }
 };
 
-console.log(generateArrayOfArrays(4, 10, -10, 5));
+console.log(generateArrayOfArrays(6, 10, -10, 5));
