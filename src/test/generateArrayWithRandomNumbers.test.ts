@@ -9,10 +9,9 @@ describe("generateArrayWithRandomNumbers testing", () => {
     });
     it("should return proper number of elements in arrays", () => {
       const result = generateArrayOfArrays(6, 10, -10, 5);
-      const randomNumber = Math.floor(Math.random() * result.length);
-      const randomElementInArray = result[randomNumber];
-      const howManyNumbersInFirstElement = randomElementInArray.length;
-      expect(howManyNumbersInFirstElement).toBe(10);
+      result.forEach((array) => {
+        expect(array).toHaveLength(10);
+      });
     });
     it("should return proper element higher or equal min in array elements", () => {
       const result = generateArrayOfArrays(6, 10, -10, 5);
@@ -41,14 +40,22 @@ describe("generateArrayWithRandomNumbers testing", () => {
       expect(expectErrorFromElementsNumberIsNotInt).toThrow();
     });
     it("- howManyArrays and howManyNumbers are less or equal 0", () => {
-      function expectErrorFromArraysNumberIsLessOrEqual0() {
+      function expectErrorFromArraysNumberIsEqual0() {
         generateArrayOfArrays(0, 2, 3, 4);
       }
-      expect(expectErrorFromArraysNumberIsLessOrEqual0).toThrow();
+      expect(expectErrorFromArraysNumberIsEqual0).toThrow();
+      function expectErrorFromElementsNumberIsEqual0() {
+        generateArrayOfArrays(2, 0, 3, 4);
+      }
+      expect(expectErrorFromElementsNumberIsEqual0).toThrow();
       function expectErrorFromElementsNumberIsIsLessOrEqual0() {
         generateArrayOfArrays(1, -10, 3, 4);
       }
       expect(expectErrorFromElementsNumberIsIsLessOrEqual0).toThrow();
+      function expectErrorFromArraysNumberIsLessThan0() {
+        generateArrayOfArrays(-1, 10, 3, 4);
+      }
+      expect(expectErrorFromArraysNumberIsLessThan0).toThrow();
     });
     it("- min number is higher than max number", () => {
       function expectError() {
